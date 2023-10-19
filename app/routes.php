@@ -13,9 +13,13 @@ return function (App $app) {
 
     $app->get('/', function ($request, $response, $args) use ($container) {
         $renderer = $container->get(PhpRenderer::class);
-        return $renderer->render($response, "index.php", $args);
+        return $renderer->render($response, "shoppinglist.php", $args);
     });
 
     $app->get('/courses', CoursesAPIController::class);
+    $app->get('/shoppinglist',\App\Controllers\DisplayShoppingListController::class);
+    $app->post('/addItem', \App\Controllers\AddItemShoppingListController::class);
+    $app->get('/purchased/{itemId}',\App\Controllers\HideItemWhenPurchasedController::class);
+    $app->get('/purchaseditems',\App\Controllers\PurchasedItemsController::class);
 
 };
